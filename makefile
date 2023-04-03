@@ -1,4 +1,4 @@
-.PHONY: up stop down install sh
+.PHONY: up stop down install sh clear
 up:
 	docker-compose up -d
 stop:
@@ -9,3 +9,5 @@ install:
 	docker-compose exec php composer install
 sh:
 	docker-compose exec php sh
+clear:
+	docker-compose exec php bin/console cache:clear
