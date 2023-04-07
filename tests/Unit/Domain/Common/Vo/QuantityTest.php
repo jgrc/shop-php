@@ -4,6 +4,7 @@ namespace Jgrc\Shop\Unit\Domain\Common\Vo;
 
 use InvalidArgumentException;
 use Jgrc\Shop\Domain\Common\Vo\Quantity;
+use Jgrc\Shop\Tool\Stub\IntStub;
 use PHPUnit\Framework\TestCase;
 
 class QuantityTest extends TestCase
@@ -21,13 +22,13 @@ class QuantityTest extends TestCase
     {
         return [
             'zero' => [0],
-            'greater than zero value' => [14],
+            'greater than zero value' => [IntStub::positive()],
         ];
     }
 
     public function testCantBeCreatedFromNegative(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        new Quantity(-1);
+        new Quantity(IntStub::negative());
     }
 }

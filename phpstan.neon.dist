@@ -3,3 +3,7 @@ parameters:
 	paths:
 		- src
 		- tests
+	ignoreErrors:
+	    -
+	        message: '#should return string but returns array\|string#'
+	        path: tests/Tool/Stub

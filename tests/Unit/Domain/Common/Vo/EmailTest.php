@@ -4,13 +4,14 @@ namespace Jgrc\Shop\Unit\Domain\Common\Vo;
 
 use InvalidArgumentException;
 use Jgrc\Shop\Domain\Common\Vo\Email;
+use Jgrc\Shop\Tool\Stub\StringStub;
 use PHPUnit\Framework\TestCase;
 
 class EmailTest extends TestCase
 {
     public function testCanBeCreatedFromValidValue(): void
     {
-        $value = 'valid@email.com';
+        $value = StringStub::email();
         $email = new Email($value);
 
         $this->assertSame($value, $email->value());

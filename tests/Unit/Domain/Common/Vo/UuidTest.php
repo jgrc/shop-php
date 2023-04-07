@@ -4,13 +4,14 @@ namespace Jgrc\Shop\Unit\Domain\Common\Vo;
 
 use InvalidArgumentException;
 use Jgrc\Shop\Domain\Common\Vo\Uuid;
+use Jgrc\Shop\Tool\Stub\StringStub;
 use PHPUnit\Framework\TestCase;
 
 class UuidTest extends TestCase
 {
     public function testCanBeCreatedFromValidValue(): void
     {
-        $value = 'ef81a118-010b-4375-b966-3437f61fc87a';
+        $value = StringStub::uuid();
         $name = new Uuid($value);
 
         $this->assertSame($value, $name->value());

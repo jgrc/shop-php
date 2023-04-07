@@ -4,6 +4,7 @@ namespace Jgrc\Shop\Unit\Domain\Common\Vo;
 
 use InvalidArgumentException;
 use Jgrc\Shop\Domain\Common\Vo\Price;
+use Jgrc\Shop\Tool\Stub\IntStub;
 use PHPUnit\Framework\TestCase;
 
 class PriceTest extends TestCase
@@ -21,13 +22,13 @@ class PriceTest extends TestCase
     {
         return [
             'zero' => [0],
-            'greater than zero value' => [14],
+            'greater than zero value' => [IntStub::positive()],
         ];
     }
 
     public function testCantBeCreatedFromNegative(): void
     {
         $this->expectException(InvalidArgumentException::class);
-        new Price(-1);
+        new Price(IntStub::negative());
     }
 }

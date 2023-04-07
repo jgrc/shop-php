@@ -4,13 +4,14 @@ namespace Jgrc\Shop\Unit\Domain\Common\Vo;
 
 use InvalidArgumentException;
 use Jgrc\Shop\Domain\Common\Vo\Image;
+use Jgrc\Shop\Tool\Stub\StringStub;
 use PHPUnit\Framework\TestCase;
 
 class ImageTest extends TestCase
 {
     public function testCanBeCreatedFromValidValue(): void
     {
-        $value = 'https://www.domain-com/image.jpg';
+        $value = StringStub::url();
         $image = new Image($value);
 
         $this->assertSame($value, $image->value());
