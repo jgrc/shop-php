@@ -2,12 +2,15 @@
 
 namespace Jgrc\Shop\Domain\Common\Vo;
 
+use Assert\Assertion;
+
 class Price
 {
     private int $value;
 
     public function __construct(int $value)
     {
+        Assertion::greaterOrEqualThan($value, 0, 'Price "%s" should be greater or equal than "%s".');
         $this->value = $value;
     }
 

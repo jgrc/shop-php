@@ -2,12 +2,15 @@
 
 namespace Jgrc\Shop\Domain\Common\Vo;
 
+use Assert\Assertion;
+
 class Email
 {
     private string $value;
 
     public function __construct(string $value)
     {
+        Assertion::email($value, 'The email "%s" is not valid.');
         $this->value = $value;
     }
 

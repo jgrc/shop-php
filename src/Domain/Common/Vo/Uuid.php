@@ -2,12 +2,15 @@
 
 namespace Jgrc\Shop\Domain\Common\Vo;
 
+use Assert\Assertion;
+
 class Uuid
 {
     private string $value;
 
     public function __construct(string $value)
     {
+        Assertion::uuid($value, 'Id "%s" is not a valid UUID.');
         $this->value = $value;
     }
 
