@@ -1,0 +1,63 @@
+doctrine:
+    dbal:
+        url: '%env(resolve:DATABASE_URL)%'
+        server_version: '%env(resolve:DATABASE_VERSION)%'
+        types:
+            uuid_type: Jgrc\Shop\Infrastructure\Persistence\Dbal\Types\UuidType
+            name_type: Jgrc\Shop\Infrastructure\Persistence\Dbal\Types\NameType
+            email_type: Jgrc\Shop\Infrastructure\Persistence\Dbal\Types\EmailType
+            image_type: Jgrc\Shop\Infrastructure\Persistence\Dbal\Types\ImageType
+            price_type: Jgrc\Shop\Infrastructure\Persistence\Dbal\Types\PriceType
+            quantity_type: Jgrc\Shop\Infrastructure\Persistence\Dbal\Types\QuantityType
+            cart_state_type: Jgrc\Shop\Infrastructure\Persistence\Dbal\Types\CartStateType
+    orm:
+        auto_generate_proxy_classes: true
+        enable_lazy_ghost_objects: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            Jgrc\Shop\Domain\Category:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Infrastructure/Persistence/Orm/Mapping/Category'
+                prefix: 'Jgrc\Shop\Domain\Category'
+            Jgrc\Shop\Domain\Product:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Infrastructure/Persistence/Orm/Mapping/Product'
+                prefix: 'Jgrc\Shop\Domain\Product'
+            Jgrc\Shop\Domain\User:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Infrastructure/Persistence/Orm/Mapping/User'
+                prefix: 'Jgrc\Shop\Domain\User'
+            Jgrc\Shop\Domain\Cart:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Infrastructure/Persistence/Orm/Mapping/Cart'
+                prefix: 'Jgrc\Shop\Domain\Cart'
+when@test:
+    doctrine:
+        dbal:
+            # "TEST_TOKEN" is typically set by ParaTest
+            dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+
+when@prod:
+    doctrine:
+        orm:
+            auto_generate_proxy_classes: false
+            proxy_dir: '%kernel.build_dir%/doctrine/orm/Proxies'
+            query_cache_driver:
+                type: pool
+                pool: doctrine.system_cache_pool
+            result_cache_driver:
+                type: pool
+                pool: doctrine.result_cache_pool
+
+    framework:
+        cache:
+            pools:
+                doctrine.result_cache_pool:
+                    adapter: cache.app
+                doctrine.system_cache_pool:
+                    adapter: cache.system

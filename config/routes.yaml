@@ -1,5 +1,5 @@
 controllers:
     resource:
-        path: ../src/Controller/
-        namespace: Jgrc\Shop\Controller
+        path: ../src/Infrastructure/Ui/Http
+        namespace: Jgrc\Shop\Infrastructure\Ui\Http
     type: attribute

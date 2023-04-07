@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<doctrine-mapping
+        xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+        xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
+>
+    <entity name="Jgrc\Shop\Domain\Product\Product" table="products">
+        <id name="id" type="uuid_type" column="id" length="36" />
+        <field name="name" type="name_type" column="name" length="50" nullable="false" />
+        <field name="price" type="price_type" column="price" nullable="false">
+            <options>
+                <option name="unsigned">true</option>
+            </options>
+        </field>
+        <field name="image" type="image_type" column="image" nullable="false" />
+        <field name="enabled" type="boolean" column="enabled" nullable="false" />
+        <field name="createdAt" type="datetime_immutable" column="created_at" nullable="false" />
+        <many-to-one field="category" target-entity="Jgrc\Shop\Domain\Category\Category">
+            <join-column name="category_id" referenced-column-name="id" nullable="false" />
+        </many-to-one>
+    </entity>
+</doctrine-mapping>
