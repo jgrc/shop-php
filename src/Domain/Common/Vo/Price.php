@@ -16,7 +16,8 @@ class Price
         return $this->value;
     }
 
-    public function equals(Price $other): bool {
+    public function equals(Price $other): bool
+    {
         return $this->value === $other->value;
     }
 }

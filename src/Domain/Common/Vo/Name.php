@@ -16,7 +16,8 @@ class Name
         return $this->value;
     }
 
-    public function equals(Name $other): bool {
+    public function equals(Name $other): bool
+    {
         return $this->value === $other->value;
     }
 }

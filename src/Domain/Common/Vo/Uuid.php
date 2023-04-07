@@ -16,7 +16,8 @@ class Uuid
         return $this->value;
     }
 
-    public function equals(Uuid $other): bool {
+    public function equals(Uuid $other): bool
+    {
         return $this->value === $other->value;
     }
 }

@@ -16,7 +16,8 @@ class Quantity
         return $this->value;
     }
 
-    public function equals(Quantity $other): bool {
+    public function equals(Quantity $other): bool
+    {
         return $this->value === $other->value;
     }
 }

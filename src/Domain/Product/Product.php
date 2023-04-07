@@ -26,7 +26,7 @@ class Product
         Image $image,
         Category $category,
         DateTimeImmutable $createdAt
-    ){
+    ) {
         $this->id = $id;
         $this->name = $name;
         $this->price = $price;
