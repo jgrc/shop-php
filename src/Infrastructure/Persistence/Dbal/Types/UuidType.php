@@ -15,6 +15,7 @@ class UuidType extends StringType
         return self::NAME;
     }
 
+    /** @param ?string $value */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?Uuid
     {
         return $value === null ? null : new Uuid($value);

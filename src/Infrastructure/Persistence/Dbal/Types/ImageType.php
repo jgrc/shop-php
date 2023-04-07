@@ -15,6 +15,7 @@ class ImageType extends StringType
         return self::NAME;
     }
 
+    /** @param ?string $value */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?Image
     {
         return $value === null ? null : new Image($value);

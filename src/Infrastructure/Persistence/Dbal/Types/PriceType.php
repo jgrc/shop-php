@@ -15,6 +15,7 @@ class PriceType extends IntegerType
         return self::NAME;
     }
 
+    /** @param ?int $value */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?Price
     {
         return $value === null ? null : new Price($value);

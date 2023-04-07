@@ -3,7 +3,7 @@
 namespace Jgrc\Shop\Domain\Product;
 
 use DateTimeImmutable;
-use Jgrc\Shop\domain\Category\Category;
+use Jgrc\Shop\Domain\Category\Category;
 use Jgrc\Shop\Domain\Common\Vo\Image;
 use Jgrc\Shop\Domain\Common\Vo\Name;
 use Jgrc\Shop\Domain\Common\Vo\Price;

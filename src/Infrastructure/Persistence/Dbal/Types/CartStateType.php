@@ -15,6 +15,7 @@ class CartStateType extends IntegerType
         return self::NAME;
     }
 
+    /** @param ?int $value */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?CartState
     {
         return $value === null ? null : CartState::from($value);

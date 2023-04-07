@@ -15,6 +15,7 @@ class EmailType extends StringType
         return self::NAME;
     }
 
+    /** @param ?string $value */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?Email
     {
         return $value === null ? null : new Email($value);

@@ -15,6 +15,7 @@ class QuantityType extends IntegerType
         return self::NAME;
     }
 
+    /** @param ?int $value */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?Quantity
     {
         return $value === null ? null : new Quantity($value);

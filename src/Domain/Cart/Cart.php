@@ -14,6 +14,7 @@ class Cart
     private Uuid $id;
     private User $user;
     private CartState $state;
+    /** @var Collection<int, CartLine> $lines */
     private Collection $lines;
     private DateTimeImmutable $createdAt;
 
@@ -46,6 +47,7 @@ class Cart
         return $this->createdAt;
     }
 
+    /** @return  Collection<int, CartLine> */
     public function lines(): Collection
     {
         return $this->lines;

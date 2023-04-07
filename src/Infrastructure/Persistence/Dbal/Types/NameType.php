@@ -15,6 +15,7 @@ class NameType extends StringType
         return self::NAME;
     }
 
+    /** @param ?string $value */
     public function convertToPHPValue($value, AbstractPlatform $platform): ?Name
     {
         return $value === null ? null : new Name($value);
