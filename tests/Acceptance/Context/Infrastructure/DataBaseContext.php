@@ -15,8 +15,6 @@ class DataBaseContext implements Context
     private EntityManagerInterface $entityManager;
     private string $databaseName;
     private static bool $created = false;
-    /** @var string[] */
-    private static array $tables = [];
 
     public function __construct(EntityManagerInterface $entityManager, string $databaseName)
     {
@@ -41,17 +39,15 @@ class DataBaseContext implements Context
     }
 
     /** @BeforeScenario */
-    public function purgeTables(): void
+    public function beginTransaction(): void
     {
-        $this->loadTables();
-        $this->executeQuery('SET FOREIGN_KEY_CHECKS=0');
-        array_walk(self::$tables, fn(string $table) => $this->executeQuery('TRUNCATE TABLE ' . $table));
-        $this->executeQuery('SET FOREIGN_KEY_CHECKS=1');
+        $this->entityManager->beginTransaction();
     }
 
-    private function executeQuery(string $sql): void
+    /** @AfterScenario  */
+    public function rollback(): void
     {
-        $this->entityManager->getConnection()->prepare($sql)->executeQuery();
+        $this->entityManager->rollback();
     }
 
     private function createTempConnection(): Connection
@@ -59,14 +55,5 @@ class DataBaseContext implements Context
         $params = $this->entityManager->getConnection()->getParams();
         unset($params['dbname'], $params['url']);
         return DriverManager::getConnection($params, $this->entityManager->getConnection()->getConfiguration());
-    }
-
-    private function loadTables(): void
-    {
-        if (self::$tables) {
-            return;
-        }
-
-        self::$tables = $this->entityManager->getConnection()->createSchemaManager()->listTableNames();
     }
 }
