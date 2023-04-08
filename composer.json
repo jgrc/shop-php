@@ -15,6 +15,7 @@
         "symfony/dotenv": "6.2.*",
         "symfony/flex": "^2",
         "symfony/framework-bundle": "6.2.*",
+        "symfony/messenger": "6.2.*",
         "symfony/runtime": "6.2.*",
         "symfony/yaml": "6.2.*"
     },
@@ -66,6 +67,7 @@
         }
     },
     "require-dev": {
+        "behat/behat": "^3.12",
         "fakerphp/faker": "^1.21",
         "phpstan/phpstan": "^1.10",
         "phpunit/phpunit": "^10",

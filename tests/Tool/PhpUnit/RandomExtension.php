@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jgrc\Shop\Tool\PhpUnit;
 
 use Jgrc\Shop\Tool\PhpUnit\Memo\Memo;

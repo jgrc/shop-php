@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jgrc\Shop\Infrastructure\Ui\Http\Category;
 
 use Symfony\Component\HttpFoundation\Response;

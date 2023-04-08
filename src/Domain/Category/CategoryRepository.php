@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jgrc\Shop\Domain\Category;
 
 use Jgrc\Shop\Domain\Common\Vo\Uuid;

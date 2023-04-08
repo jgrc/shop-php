@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jgrc\Shop\Infrastructure\Persistence\Orm\Repository;
 
 use Doctrine\ORM\EntityManager;
@@ -18,7 +20,7 @@ class DoctrineProductRepository implements ProductRepository
 
     public function byId(Uuid $id): ?Product
     {
-        return $this->entityManager->find('Jgrc\Shop\Domain\Product\Product', $id);
+        return $this->entityManager->find(Product::class, $id);
     }
 
     public function save(Product $product): void

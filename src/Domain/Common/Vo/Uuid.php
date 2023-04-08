@@ -1,10 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jgrc\Shop\Domain\Common\Vo;
 
 use Assert\Assertion;
+use Stringable;
 
-class Uuid
+class Uuid implements Stringable
 {
     private string $value;
 
@@ -22,5 +25,10 @@ class Uuid
     public function equals(Uuid $other): bool
     {
         return $this->value === $other->value;
+    }
+
+    public function __toString(): string
+    {
+        return $this->value();
     }
 }

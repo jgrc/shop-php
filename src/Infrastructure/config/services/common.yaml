@@ -1,0 +1,10 @@
+services:
+
+  clock:
+    class: Jgrc\Shop\Infrastructure\SystemClock
+
+  # BUSES
+  command.bus:
+    class: Jgrc\Shop\Infrastructure\Bus\MessengerCommandBus
+    arguments:
+      - '@messenger.command.bus'

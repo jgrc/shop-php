@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jgrc\Shop\Unit\Domain\Common\Vo;
 
 use InvalidArgumentException;

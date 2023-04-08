@@ -1,5 +1,5 @@
 parameters:
-	level: 9
+	level: max
 	paths:
 		- src
 		- tests
@@ -7,3 +7,9 @@ parameters:
 	    -
 	        message: '#should return string but returns array\|string#'
 	        path: tests/Tool/Stub
+	    -
+	        message: '#Call to an undefined method [a-zA-Z0-9\\_]+::method\(\)#'
+	        path: tests/Unit
+	    -
+	        message: '#Call to an undefined method [a-zA-Z0-9\\_]+::expects\(\)#'
+	        path: tests/Unit

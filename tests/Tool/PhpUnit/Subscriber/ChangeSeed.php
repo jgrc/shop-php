@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jgrc\Shop\Tool\PhpUnit\Subscriber;
 
 use Jgrc\Shop\Tool\Stub\RandomGenerator;

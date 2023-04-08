@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jgrc\Shop\Infrastructure\Persistence\Dbal\Types;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;

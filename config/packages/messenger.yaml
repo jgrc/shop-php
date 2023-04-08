@@ -1,0 +1,6 @@
+framework:
+    messenger:
+        buses:
+            messenger.command.bus:
+                middleware:
+                    - doctrine_transaction

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Jgrc\Shop\Infrastructure\Persistence\Orm\Repository;
 
 use Doctrine\ORM\EntityManager;
@@ -18,7 +20,7 @@ class DoctrineCategoryRepository implements CategoryRepository
 
     public function byId(Uuid $id): ?Category
     {
-        return $this->entityManager->find('Jgrc\Shop\Domain\Category\Category', $id);
+        return $this->entityManager->find(Category::class, $id);
     }
 
     public function save(Category $category): void
