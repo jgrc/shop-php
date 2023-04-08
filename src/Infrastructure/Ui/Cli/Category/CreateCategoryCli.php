@@ -24,7 +24,7 @@ class CreateCategoryCli extends Command
         $this->clock = $clock;
     }
 
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->addArgument('id', InputArgument::REQUIRED, 'Category id.')
@@ -35,8 +35,8 @@ class CreateCategoryCli extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $command = new CreateCategory(
-            $input->getArgument('id'),
-            $input->getArgument('name'),
+            (string) $input->getArgument('id'),
+            (string) $input->getArgument('name'),
             $this->clock->now()
         );
         $this->commandBus->dispatch($command);

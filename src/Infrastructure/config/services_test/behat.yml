@@ -1,0 +1,37 @@
+services:
+  # INFRASTRUCTURE
+  Jgrc\Shop\Acceptance\Context\Infrastructure\SymfonyHttpContext:
+    class: Jgrc\Shop\Acceptance\Context\Infrastructure\SymfonyHttpContext
+    arguments:
+      - '@kernel'
+    public: true
+
+  Jgrc\Shop\Acceptance\Context\Infrastructure\SymfonyCliContext:
+    class: Jgrc\Shop\Acceptance\Context\Infrastructure\SymfonyCliContext
+    arguments:
+      - '@kernel'
+    public: true
+
+  Jgrc\Shop\Acceptance\Context\Infrastructure\DataBaseContext:
+    class: Jgrc\Shop\Acceptance\Context\Infrastructure\DataBaseContext
+    arguments:
+      - '@doctrine.orm.entity_manager'
+      - '%env(DATABASE_NAME)%'
+    public: true
+
+  Jgrc\Shop\Acceptance\Context\Infrastructure\ClockContext:
+    class: Jgrc\Shop\Acceptance\Context\Infrastructure\ClockContext
+    arguments:
+      - '@clock'
+    public: true
+
+  Jgrc\Shop\Acceptance\Context\Infrastructure\RandomContext:
+    class: Jgrc\Shop\Acceptance\Context\Infrastructure\RandomContext
+    public: true
+
+  # DOMAIN
+  Jgrc\Shop\Acceptance\Context\Domain\CategoryContext:
+    class: Jgrc\Shop\Acceptance\Context\Domain\CategoryContext
+    arguments:
+      - '@category.repository'
+    public: true

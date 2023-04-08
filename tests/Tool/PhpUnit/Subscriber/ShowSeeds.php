@@ -19,9 +19,9 @@ class ShowSeeds implements ExecutionFinishedSubscriber
 
     public function notify(ExecutionFinished $event): void
     {
-        print PHP_EOL . PHP_EOL;
+        fwrite(STDERR, sprintf('%s%s', PHP_EOL, PHP_EOL));
         foreach ($this->memo->errors() as $memoError) {
-            print $memoError . PHP_EOL;
+            fwrite(STDERR, sprintf('%s%s', $memoError, PHP_EOL));
         }
     }
 }

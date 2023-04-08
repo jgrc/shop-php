@@ -5,6 +5,9 @@ parameters:
 		- tests
 	ignoreErrors:
 	    -
+	        message: '#Cannot cast mixed to string.#'
+	        path: src/Infrastructure/Ui/Cli
+	    -
 	        message: '#should return string but returns array\|string#'
 	        path: tests/Tool/Stub
 	    -
