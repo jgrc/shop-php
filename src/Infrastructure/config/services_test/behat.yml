@@ -35,3 +35,10 @@ services:
     arguments:
       - '@category.repository'
     public: true
+
+  Jgrc\Shop\Acceptance\Context\Domain\ProductContext:
+    class: Jgrc\Shop\Acceptance\Context\Domain\ProductContext
+    arguments:
+      - '@product.repository'
+      - '@category.repository'
+    public: true

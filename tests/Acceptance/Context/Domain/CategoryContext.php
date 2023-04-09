@@ -12,6 +12,7 @@ use DateTimeImmutable;
 use Jgrc\Shop\Domain\Category\Category;
 use Jgrc\Shop\Domain\Category\CategoryNotFound;
 use Jgrc\Shop\Domain\Category\CategoryRepository;
+use Jgrc\Shop\Domain\Common\Vo\Name;
 use Jgrc\Shop\Domain\Common\Vo\Uuid;
 use Jgrc\Shop\Tool\Stub\Domain\Category\CategoryStub;
 
@@ -31,10 +32,10 @@ class CategoryContext implements Context
             function (array $row) {
                 $builder = new CategoryStub();
                 if (array_key_exists('id', $row)) {
-                    $builder->withId($row['id']);
+                    $builder->withId(new Uuid($row['id']));
                 }
                 if (array_key_exists('name', $row)) {
-                    $builder->withName($row['id']);
+                    $builder->withName(new Name($row['name']));
                 }
                 if (array_key_exists('created_at', $row)) {
                     $builder->withCreatedAt(new DateTimeImmutable($row['created_at']));

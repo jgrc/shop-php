@@ -13,7 +13,7 @@ class StringStub
 
     public static function uuid(): string
     {
-        return RandomGenerator::instance()->faker()->uuid();
+        return RandomGenerator::instance()->faker()->unique()->uuid();
     }
 
     public static function email(): string

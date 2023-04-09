@@ -22,11 +22,11 @@ class CategoryFactoryTest extends TestCase
 
     public function testCanBeCreatedFromValidData(): void
     {
-        $uuid = UuidStub::random();
+        $id = UuidStub::random();
         $name = NameStub::random();
         $createdAt = DateTimeImmutableStub::random();
-        $expected = new Category($uuid, $name, $createdAt);
+        $expected = new Category($id, $name, $createdAt);
 
-        $this->assertEquals($expected, $this->sut->__invoke($uuid, $name, $createdAt));
+        $this->assertEquals($expected, $this->sut->__invoke($id, $name, $createdAt));
     }
 }

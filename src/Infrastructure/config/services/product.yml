@@ -1,0 +1,29 @@
+services:
+
+  product.repository:
+    class: Jgrc\Shop\Infrastructure\Persistence\Orm\Repository\DoctrineProductRepository
+    arguments:
+      - '@doctrine.orm.entity_manager'
+
+  # DOMAIN SERVICES
+  product.factory:
+    class: Jgrc\Shop\Domain\Product\Service\ProductFactory
+
+  # COMMAND HANDLERS
+  create.product.handler:
+    class: Jgrc\Shop\Application\Product\CreateProductHandler
+    arguments:
+      - '@product.factory'
+      - '@category.repository'
+      - '@product.repository'
+    tags:
+      - { name: messenger.message_handler, bus: messenger.command.bus }
+
+  # CLI COMMANDS
+  cli.product.create:
+    class: Jgrc\Shop\Infrastructure\Ui\Cli\Product\CreateProductCli
+    arguments:
+      - '@command.bus'
+      - '@clock'
+    tags:
+      - console.command

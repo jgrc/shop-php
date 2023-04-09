@@ -20,7 +20,7 @@ final class SymfonyCliContext implements Context
     public function __construct(KernelInterface $kernel)
     {
         $this->application = new Application($kernel);
-        $this->application->setCatchExceptions(true);
+        $this->application->setCatchExceptions(false);
         $this->application->setAutoExit(false);
         $this->output = null;
         $this->exitCode = null;
@@ -35,14 +35,14 @@ final class SymfonyCliContext implements Context
         $this->output = $output->fetch();
     }
 
-    /** @Then the command finished with exit code :exitCode */
-    public function theLastCommandExitCodeWas(int $exitCode): void
+    /** @Then the command exit code is :exitCode */
+    public function commandExitCodeIs(int $exitCode): void
     {
         Assertion::eq($exitCode, $this->exitCode);
     }
 
-    /** @Then the command output was :output */
-    public function theLastCommandOutputWas(string $output): void
+    /** @Then the command output is :output */
+    public function commandOutputIs(string $output): void
     {
         $output = str_replace("\\n", PHP_EOL, $output);
         Assertion::eq($this->output, $output);

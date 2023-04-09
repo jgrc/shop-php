@@ -11,26 +11,27 @@ use PHPUnit\Framework\TestCase;
 
 class PriceTest extends TestCase
 {
-    /** @dataProvider canBeCreatedFromValidValue */
-    public function testCanBeCreatedFromValidValue(int $value): void
+    public function testCanBeCreatedFromValidValue(): void
     {
+        $value = IntStub::positive();
         $price = new Price($value);
 
         $this->assertSame($value, $price->value());
     }
 
+    /** @dataProvider cantBeCreatedFromZeroOrNegative */
+    public function testCantBeCreatedFromZeroOrNegative(int $value): void
+    {
+        $this->expectException(InvalidArgumentException::class);
+        new Price($value);
+    }
+
     /** @return int[][] */
-    public static function canBeCreatedFromValidValue(): array
+    public static function cantBeCreatedFromZeroOrNegative(): array
     {
         return [
             'zero' => [0],
-            'greater than zero value' => [IntStub::positive()],
+            'negative' => [IntStub::negative()],
         ];
-    }
-
-    public function testCantBeCreatedFromNegative(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-        new Price(IntStub::negative());
     }
 }

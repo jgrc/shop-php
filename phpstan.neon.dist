@@ -5,7 +5,7 @@ parameters:
 		- tests
 	ignoreErrors:
 	    -
-	        message: '#Cannot cast mixed to string.#'
+	        message: '#Cannot cast mixed to (string|int).#'
 	        path: src/Infrastructure/Ui/Cli
 	    -
 	        message: '#should return string but returns array\|string#'

@@ -12,6 +12,7 @@ sh:
 clear:
 	docker-compose exec php bin/console cache:clear
 validate:
+	docker-compose exec php bin/console lint:container
 	docker-compose exec php vendor/bin/phpcs
 	docker-compose exec php vendor/bin/phpstan
 tests:

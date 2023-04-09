@@ -10,6 +10,7 @@ default:
         - Jgrc\Shop\Acceptance\Context\Infrastructure\ClockContext
         - Jgrc\Shop\Acceptance\Context\Infrastructure\RandomContext
         - Jgrc\Shop\Acceptance\Context\Domain\CategoryContext
+        - Jgrc\Shop\Acceptance\Context\Domain\ProductContext
   extensions:
     FriendsOfBehat\SymfonyExtension:
       bootstrap: tests/bootstrap.php

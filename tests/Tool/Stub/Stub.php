@@ -11,7 +11,7 @@ trait Stub
 
     abstract protected function instance(): object;
 
-    final protected function on(callable $callable): self
+    final protected function on(callable $callable): static
     {
         $this->callables[] = $callable;
         return $this;
