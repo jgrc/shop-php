@@ -1,6 +1,8 @@
 framework:
     messenger:
+        default_bus: messenger.command.bus
         buses:
             messenger.command.bus:
                 middleware:
                     - doctrine_transaction
+            messenger.query.bus:

@@ -9,33 +9,36 @@ use Assert\Assertion;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use DateTimeImmutable;
+use Jgrc\Shop\Application\Category\CreateCategory;
 use Jgrc\Shop\Domain\Category\Category;
 use Jgrc\Shop\Domain\Category\CategoryNotFound;
 use Jgrc\Shop\Domain\Category\CategoryRepository;
-use Jgrc\Shop\Domain\Common\Vo\Name;
+use Jgrc\Shop\Domain\Common\Bus\CommandBus;
 use Jgrc\Shop\Domain\Common\Vo\Uuid;
-use Jgrc\Shop\Tool\Stub\Domain\Category\CategoryStub;
+use Jgrc\Shop\Tool\Stub\Application\Category\CreateCategoryStub;
 
 class CategoryContext implements Context
 {
+    private CommandBus $commandBus;
     private CategoryRepository $categoryRepository;
 
-    public function __construct(CategoryRepository $categoryRepository)
+    public function __construct(CommandBus $commandBus, CategoryRepository $categoryRepository)
     {
+        $this->commandBus = $commandBus;
         $this->categoryRepository = $categoryRepository;
     }
 
     /** @Given there are the following categories: */
     public function thereAreFollowingCategories(TableNode $tableNode): void
     {
-        $categories = array_map(
+        $createCategories = array_map(
             function (array $row) {
-                $builder = new CategoryStub();
+                $builder = new CreateCategoryStub();
                 if (array_key_exists('id', $row)) {
-                    $builder->withId(new Uuid($row['id']));
+                    $builder->withId($row['id']);
                 }
                 if (array_key_exists('name', $row)) {
-                    $builder->withName(new Name($row['name']));
+                    $builder->withName($row['name']);
                 }
                 if (array_key_exists('created_at', $row)) {
                     $builder->withCreatedAt(new DateTimeImmutable($row['created_at']));
@@ -44,7 +47,7 @@ class CategoryContext implements Context
             },
             $tableNode->getHash()
         );
-        array_walk($categories, fn(Category $category) => $this->categoryRepository->save($category));
+        array_walk($createCategories, fn(CreateCategory $command) => $this->commandBus->dispatch($command));
     }
 
     /** @Then the following categories should exist: */

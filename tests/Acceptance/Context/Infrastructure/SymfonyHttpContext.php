@@ -6,6 +6,7 @@ namespace Jgrc\Shop\Acceptance\Context\Infrastructure;
 
 use Assert\Assertion;
 use Behat\Behat\Context\Context;
+use Behat\Gherkin\Node\PyStringNode;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -32,5 +33,12 @@ final class SymfonyHttpContext implements Context
     {
         Assertion::notNull($this->response, 'No response');
         Assertion::eq($status, $this->response->getStatusCode());
+    }
+
+    /** @Then the response content is: */
+    public function responsePayloadIs(PyStringNode $content): void
+    {
+        Assertion::notNull($this->response, 'No response');
+        Assertion::eq($content->getRaw(), $this->response->getContent());
     }
 }

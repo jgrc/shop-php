@@ -9,52 +9,45 @@ use Assert\Assertion;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use DateTimeImmutable;
-use Jgrc\Shop\Domain\Category\Category;
-use Jgrc\Shop\Domain\Category\CategoryNotFound;
-use Jgrc\Shop\Domain\Category\CategoryRepository;
-use Jgrc\Shop\Domain\Common\Vo\Image;
-use Jgrc\Shop\Domain\Common\Vo\Name;
-use Jgrc\Shop\Domain\Common\Vo\Price;
+use Jgrc\Shop\Application\Product\CreateProduct;
+use Jgrc\Shop\Domain\Common\Bus\CommandBus;
 use Jgrc\Shop\Domain\Common\Vo\Uuid;
 use Jgrc\Shop\Domain\Product\Product;
 use Jgrc\Shop\Domain\Product\ProductNotFound;
 use Jgrc\Shop\Domain\Product\ProductRepository;
-use Jgrc\Shop\Tool\Stub\Domain\Product\ProductStub;
+use Jgrc\Shop\Tool\Stub\Application\Product\CreateProductStub;
 
 class ProductContext implements Context
 {
+    private CommandBus $commandBus;
     private ProductRepository $productRepository;
-    private CategoryRepository $categoryRepository;
 
-    public function __construct(
-        ProductRepository $productRepository,
-        CategoryRepository $categoryRepository
-    ) {
+    public function __construct(CommandBus $commandBus, ProductRepository $productRepository)
+    {
+        $this->commandBus = $commandBus;
         $this->productRepository = $productRepository;
-        $this->categoryRepository = $categoryRepository;
     }
 
     /** @Given there are the following products: */
     public function thereAreFollowingProducts(TableNode $tableNode): void
     {
-        $products = array_map(
+        $createProducts = array_map(
             function (array $row) {
-                $builder = new ProductStub();
+                $builder = new CreateProductStub();
                 if (array_key_exists('id', $row)) {
-                    $builder->withId(new Uuid($row['id']));
+                    $builder->withId($row['id']);
                 }
                 if (array_key_exists('name', $row)) {
-                    $builder->withName(new Name($row['name']));
+                    $builder->withName($row['name']);
                 }
                 if (array_key_exists('price', $row)) {
-                    $builder->withPrice(new Price((int) $row['price']));
+                    $builder->withPrice((int) $row['price']);
                 }
                 if (array_key_exists('image', $row)) {
-                    $builder->withImage(new Image($row['image']));
+                    $builder->withImage($row['image']);
                 }
                 if (array_key_exists('category_id', $row)) {
-                    $category = $this->loadCategory(new Uuid($row['category_id']));
-                    $builder->withCategory($category);
+                    $builder->withCategoryId($row['category_id']);
                 }
                 if (array_key_exists('created_at', $row)) {
                     $builder->withCreatedAt(new DateTimeImmutable($row['created_at']));
@@ -63,7 +56,7 @@ class ProductContext implements Context
             },
             $tableNode->getHash()
         );
-        array_walk($products, fn(Product $product) => $this->productRepository->save($product));
+        array_walk($createProducts, fn(CreateProduct $command) => $this->commandBus->dispatch($command));
     }
 
     /** @Then the following products should exist: */
@@ -109,15 +102,6 @@ class ProductContext implements Context
             },
             $tableNode->getHash()
         );
-    }
-
-    private function loadCategory(Uuid $id): Category
-    {
-        if (!$category = $this->categoryRepository->byId($id)) {
-            throw CategoryNotFound::fromId($id);
-        }
-
-        return $category;
     }
 
     private function loadProduct(Uuid $id): Product

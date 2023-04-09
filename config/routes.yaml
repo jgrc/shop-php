@@ -1,5 +1,2 @@
-controllers:
-    resource:
-        path: ../src/Infrastructure/Ui/Http
-        namespace: Jgrc\Shop\Infrastructure\Ui\Http
-    type: attribute
+routes:
+    resource: ../src/Infrastructure/config/routes/routes.yaml

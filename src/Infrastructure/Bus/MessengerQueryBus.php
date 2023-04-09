@@ -7,6 +7,7 @@ namespace Jgrc\Shop\Infrastructure\Bus;
 use Jgrc\Shop\Domain\Common\Bus\Query;
 use Jgrc\Shop\Domain\Common\Bus\QueryBus;
 use Symfony\Component\Messenger\MessageBusInterface;
+use Symfony\Component\Messenger\Stamp\HandledStamp;
 
 class MessengerQueryBus implements QueryBus
 {
@@ -19,6 +20,10 @@ class MessengerQueryBus implements QueryBus
 
     public function query(Query $query): object
     {
-        return $this->bus->dispatch($query)->getMessage();
+        /** @var HandledStamp $handledStamp */
+        $handledStamp = $this->bus->dispatch($query)->last(HandledStamp::class);
+        /** @var object $result */
+        $result = $handledStamp->getResult();
+        return $result;
     }
 }

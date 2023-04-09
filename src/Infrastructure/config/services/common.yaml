@@ -3,8 +3,22 @@ services:
   clock:
     class: Jgrc\Shop\Infrastructure\SystemClock
 
+  es.factory:
+    class: Jgrc\Shop\Infrastructure\Persistence\Es\ClientFactory
+
+  es.client:
+    class: Elastic\Elasticsearch\Client
+    factory: ['@es.factory', create]
+    arguments:
+      - '%env(resolve:ELASTIC_URLS)%'
+
   # BUSES
   command.bus:
     class: Jgrc\Shop\Infrastructure\Bus\MessengerCommandBus
     arguments:
       - '@messenger.command.bus'
+
+  query.bus:
+    class: Jgrc\Shop\Infrastructure\Bus\MessengerQueryBus
+    arguments:
+      - '@messenger.query.bus'

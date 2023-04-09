@@ -16,7 +16,7 @@ services:
     class: Jgrc\Shop\Acceptance\Context\Infrastructure\DataBaseContext
     arguments:
       - '@doctrine.orm.entity_manager'
-      - '%env(DATABASE_NAME)%'
+      - '%env(resolve:DATABASE_NAME)%'
     public: true
 
   Jgrc\Shop\Acceptance\Context\Infrastructure\ClockContext:
@@ -33,12 +33,13 @@ services:
   Jgrc\Shop\Acceptance\Context\Domain\CategoryContext:
     class: Jgrc\Shop\Acceptance\Context\Domain\CategoryContext
     arguments:
+      - '@command.bus'
       - '@category.repository'
     public: true
 
   Jgrc\Shop\Acceptance\Context\Domain\ProductContext:
     class: Jgrc\Shop\Acceptance\Context\Domain\ProductContext
     arguments:
+      - '@command.bus'
       - '@product.repository'
-      - '@category.repository'
     public: true

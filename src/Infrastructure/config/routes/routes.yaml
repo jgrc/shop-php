@@ -1,0 +1,3 @@
+get.product.id:
+  path:       /products/{id}
+  controller: http.product.get-by-id
