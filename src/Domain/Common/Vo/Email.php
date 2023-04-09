@@ -12,7 +12,7 @@ class Email
 
     public function __construct(string $value)
     {
-        Assertion::email($value, 'The email "%s" is not valid.');
+        Assertion::email($value, 'The email "%s" is not valid.', 'email');
         $this->value = $value;
     }
 

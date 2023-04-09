@@ -6,9 +6,6 @@ namespace Jgrc\Shop\Infrastructure\Ui\Http\Product;
 
 use Jgrc\Shop\Application\Product\GetProductById;
 use Jgrc\Shop\Domain\Common\Bus\QueryBus;
-use Jgrc\Shop\Domain\Product\View\ProductProjection;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 class GetProductByIdController
 {
@@ -19,20 +16,8 @@ class GetProductByIdController
         $this->queryBus = $queryBus;
     }
 
-    #[Route('/products/{id}', methods: ['GET'])]
-    public function __invoke(string $id): Response
+    public function __invoke(string $id): object
     {
-        /** @var ProductProjection $product */
-        $product = $this->queryBus->query(new GetProductById($id));
-        return new Response(
-            (string) json_encode(
-                [
-                    'id' => $product->id(),
-                    'name' => $product->name(),
-                    'price' => $product->price(),
-                ]
-            ),
-            Response::HTTP_OK
-        );
+        return $this->queryBus->query(new GetProductById($id));
     }
 }

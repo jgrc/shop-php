@@ -12,7 +12,7 @@ class Image
 
     public function __construct(string $value)
     {
-        Assertion::url($value, 'The image "%s" is not a valid url.');
+        Assertion::url($value, 'The image "%s" is not a valid url.', 'image');
         $this->value = $value;
     }
 

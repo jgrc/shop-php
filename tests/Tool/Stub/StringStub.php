@@ -11,6 +11,16 @@ class StringStub
         return RandomGenerator::instance()->faker()->words($number, true);
     }
 
+    public static function sentence(): string
+    {
+        return RandomGenerator::instance()->faker()->sentence();
+    }
+
+    public static function paragraph(): string
+    {
+        return RandomGenerator::instance()->faker()->paragraph();
+    }
+
     public static function uuid(): string
     {
         return RandomGenerator::instance()->faker()->unique()->uuid();

@@ -12,7 +12,12 @@ class Price
 
     public function __construct(int $value)
     {
-        Assertion::greaterOrEqualThan($value, 1, 'Price "%s" should be greater or equal than "%s".');
+        Assertion::greaterOrEqualThan(
+            $value,
+            1,
+            'Price "%s" should be greater or equal than "%s".',
+            'price'
+        );
         $this->value = $value;
     }
 

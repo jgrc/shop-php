@@ -1,8 +1,16 @@
 framework:
     messenger:
         default_bus: messenger.command.bus
+        transports:
+            sync: 'sync://'
         buses:
             messenger.command.bus:
                 middleware:
                     - doctrine_transaction
+                    - throw.exception.middleware
             messenger.query.bus:
+                middleware:
+                    - throw.exception.middleware
+            messenger.transformer.bus:
+                middleware:
+                    - throw.exception.middleware

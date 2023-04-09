@@ -12,7 +12,12 @@ class Quantity
 
     public function __construct(int $value)
     {
-        Assertion::greaterOrEqualThan($value, 0, 'Quantity "%s" should be greater or equal than "%s".');
+        Assertion::greaterOrEqualThan(
+            $value,
+            0,
+            'Quantity "%s" should be greater or equal than "%s".',
+            'quantity'
+        );
         $this->value = $value;
     }
 

@@ -1,5 +1,6 @@
 services:
 
+  # DOCTRINE
   category.repository:
     class: Jgrc\Shop\Infrastructure\Persistence\Orm\Repository\DoctrineCategoryRepository
     arguments:

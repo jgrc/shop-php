@@ -1,6 +1,6 @@
 <?php
 
-namespace Jgrc\Shop\Infrastructure;
+namespace Jgrc\Shop\Infrastructure\Symfony;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;

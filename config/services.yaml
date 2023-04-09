@@ -1,5 +1,5 @@
 imports:
-    - { resource: ../src/Infrastructure/config/services/ }
+    - { resource: ../src/Infrastructure/Symfony/config/services/ }
 
 services:
     _defaults:

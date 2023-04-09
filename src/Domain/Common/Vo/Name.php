@@ -12,7 +12,7 @@ class Name
 
     public function __construct(string $value)
     {
-        Assertion::notEmpty($value, 'The name can\'t be empty.');
+        Assertion::notEmpty($value, 'The name can\'t be empty.', 'name');
         $this->value = $value;
     }
 

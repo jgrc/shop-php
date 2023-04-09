@@ -13,7 +13,7 @@ class Uuid implements Stringable
 
     public function __construct(string $value)
     {
-        Assertion::uuid($value, 'Id "%s" is not a valid UUID.');
+        Assertion::uuid($value, 'Id "%s" is not a valid UUID.', 'id');
         $this->value = $value;
     }
 

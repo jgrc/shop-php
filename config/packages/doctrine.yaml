@@ -19,20 +19,20 @@ doctrine:
             Jgrc\Shop\Domain\Category:
                 is_bundle: false
                 type: xml
-                dir: '%kernel.project_dir%/src/Infrastructure/config/orm/Category'
+                dir: '%kernel.project_dir%/src/Infrastructure/Symfony/config/orm/Category'
                 prefix: 'Jgrc\Shop\Domain\Category'
             Jgrc\Shop\Domain\Product:
                 is_bundle: false
                 type: xml
-                dir: '%kernel.project_dir%/src/Infrastructure/config/orm/Product'
+                dir: '%kernel.project_dir%/src/Infrastructure/Symfony/config/orm/Product'
                 prefix: 'Jgrc\Shop\Domain\Product'
             Jgrc\Shop\Domain\User:
                 is_bundle: false
                 type: xml
-                dir: '%kernel.project_dir%/src/Infrastructure/config/orm/User'
+                dir: '%kernel.project_dir%/src/Infrastructure/Symfony/config/orm/User'
                 prefix: 'Jgrc\Shop\Domain\User'
             Jgrc\Shop\Domain\Cart:
                 is_bundle: false
                 type: xml
-                dir: '%kernel.project_dir%/src/Infrastructure/config/orm/Cart'
+                dir: '%kernel.project_dir%/src/Infrastructure/Symfony/config/orm/Cart'
                 prefix: 'Jgrc\Shop\Domain\Cart'

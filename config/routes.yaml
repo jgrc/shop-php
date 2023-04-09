@@ -1,2 +1,2 @@
 routes:
-    resource: ../src/Infrastructure/config/routes/routes.yaml
+    resource: ../src/Infrastructure/Symfony/config/routes/routes.yaml

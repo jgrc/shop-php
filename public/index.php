@@ -1,6 +1,6 @@
 <?php
 
-use Jgrc\Shop\Infrastructure\Kernel;
+use Jgrc\Shop\Infrastructure\Symfony\Kernel;
 
 require_once dirname(__DIR__) . '/vendor/autoload_runtime.php';
 

@@ -12,5 +12,29 @@ Feature: Getting products by id
     Then the response status is 200
     And the response content is:
     """
-    {"id":"00000000-0000-0000-0000-000000000001","name":"Dogs","price":10}
+    {
+      "data": {
+        "type": "product",
+        "id": "00000000-0000-0000-0000-000000000001",
+        "attributes": {
+          "name": "Dogs",
+          "price": 10
+        }
+      }
+    }
+    """
+
+  Scenario: Product not found
+    When the "GET" request is sent to "/products/00000000-0000-0000-0000-000000000001"
+    Then the response status is 404
+    And the response content is:
+    """
+    {
+      "errors": [
+        {
+          "title": "Product \u002200000000-0000-0000-0000-000000000001\u0022 not found.",
+          "code": "product-not-found"
+        }
+      ]
+    }
     """

@@ -19,6 +19,13 @@ services:
       - '%env(resolve:DATABASE_NAME)%'
     public: true
 
+  Jgrc\Shop\Acceptance\Context\Infrastructure\ElasticContext:
+    class: Jgrc\Shop\Acceptance\Context\Infrastructure\ElasticContext
+    arguments:
+      - '@es.client'
+      - '%env(resolve:ELASTIC_PRODUCT_INDEX)%'
+    public: true
+
   Jgrc\Shop\Acceptance\Context\Infrastructure\ClockContext:
     class: Jgrc\Shop\Acceptance\Context\Infrastructure\ClockContext
     arguments:

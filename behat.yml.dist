@@ -7,6 +7,7 @@ default:
         - Jgrc\Shop\Acceptance\Context\Infrastructure\SymfonyHttpContext
         - Jgrc\Shop\Acceptance\Context\Infrastructure\SymfonyCliContext
         - Jgrc\Shop\Acceptance\Context\Infrastructure\DataBaseContext
+        - Jgrc\Shop\Acceptance\Context\Infrastructure\ElasticContext
         - Jgrc\Shop\Acceptance\Context\Infrastructure\ClockContext
         - Jgrc\Shop\Acceptance\Context\Infrastructure\RandomContext
         - Jgrc\Shop\Acceptance\Context\Domain\CategoryContext
@@ -16,7 +17,7 @@ default:
       bootstrap: tests/bootstrap.php
       kernel:
         environment: test
-        class: Jgrc\Shop\Infrastructure\Kernel
-        path: src/Infrastructure/Kernel.php
+        class: Jgrc\Shop\Infrastructure\Symfony\Kernel
+        path: src/Infrastructure/Symfony/Kernel.php
   formatters:
     progress: true

@@ -1,7 +1,6 @@
 services:
 
   # DOCTRINE
-
   product.repository:
     class: Jgrc\Shop\Infrastructure\Persistence\Orm\Repository\DoctrineProductRepository
     arguments:
@@ -13,7 +12,6 @@ services:
       - '@doctrine.dbal.default_connection'
 
   # ELASTIC
-
   product.store:
     class: Jgrc\Shop\Infrastructure\Persistence\Es\ElasticProductStore
     arguments:
@@ -73,10 +71,21 @@ services:
     tags:
       - console.command
 
-  # Controllers
+  # CONTROLLERS
   http.product.get-by-id:
     class: Jgrc\Shop\Infrastructure\Ui\Http\Product\GetProductByIdController
     arguments:
       - '@query.bus'
     tags:
       - controller.service_arguments
+
+  # TRANSFORMERS
+  product.transformer:
+    class: Jgrc\Shop\Infrastructure\Symfony\Http\Transformer\Product\ProductProjectionTransformer
+    tags:
+      - { name: messenger.message_handler, bus: messenger.transformer.bus }
+
+  product-not-found.transformer:
+    class: Jgrc\Shop\Infrastructure\Symfony\Http\Transformer\Product\ProductNotFoundTransformer
+    tags:
+      - { name: messenger.message_handler, bus: messenger.transformer.bus }
