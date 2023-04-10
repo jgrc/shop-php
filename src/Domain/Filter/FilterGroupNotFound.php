@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Jgrc\Shop\Domain\Product;
+namespace Jgrc\Shop\Domain\Filter;
 
 use Jgrc\Shop\Domain\Common\Exception\NotFound;
 use Jgrc\Shop\Domain\Common\Vo\Uuid;
 
-class ProductNotFound extends NotFound
+class FilterGroupNotFound extends NotFound
 {
     public static function fromId(Uuid $id): self
     {
-        return new self(sprintf('Product "%s" not found.', $id));
+        return new self(sprintf('Filter Group "%s" not found.', $id));
     }
 }

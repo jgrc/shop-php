@@ -24,13 +24,13 @@ class JsonAssertion
     private static function encode(string $json, string $parameter): array
     {
         try {
-            /** @var mixed[] $decodedJson */
+            /** @var mixed[] */
             $decodedJson = json_decode(
                 json: $json,
                 associative: true,
                 flags: JSON_THROW_ON_ERROR
             );
-            /** @var string $encodedJson */
+            /** @var string */
             $encodedJson = json_encode(
                 $decodedJson,
                 JSON_PRETTY_PRINT

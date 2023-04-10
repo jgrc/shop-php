@@ -20,16 +20,16 @@ class KernelViewListener
 
     public function __invoke(ViewEvent $event): void
     {
-        /** @var object $response */
+        /** @var object */
         $response = $event->getControllerResult();
         $event->setResponse($this->transform($response));
     }
 
     private function transform(object $response): JsonResponse
     {
-        /** @var HandledStamp $handledStamp */
+        /** @var HandledStamp */
         $handledStamp = $this->transformerBus->dispatch($response)->last(HandledStamp::class);
-        /** @var JsonResponse $result */
+        /** @var JsonResponse */
         $result = $handledStamp->getResult();
         return $result;
     }

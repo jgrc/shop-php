@@ -29,9 +29,9 @@ class KernelExceptionListener
     private function transform(Throwable $throwable): JsonResponse
     {
         try {
-            /** @var HandledStamp $handledStamp */
+            /** @var HandledStamp */
             $handledStamp = $this->transformerBus->dispatch($throwable)->last(HandledStamp::class);
-            /** @var JsonResponse $result */
+            /** @var JsonResponse */
             $result = $handledStamp->getResult();
             return $result;
         } catch (NoHandlerForMessageException $exception) {

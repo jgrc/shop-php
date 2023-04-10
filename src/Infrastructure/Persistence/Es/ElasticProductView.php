@@ -27,7 +27,7 @@ class ElasticProductView implements ProductView
     public function byId(Uuid $id): ProductProjection
     {
         try {
-            /** @var Elasticsearch $response */
+            /** @var Elasticsearch */
             $response = $this->client->get(['index' => $this->index, 'id' => $id]);
             $document = $response->asArray();
 

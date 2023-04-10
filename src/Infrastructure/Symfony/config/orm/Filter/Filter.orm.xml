@@ -4,17 +4,12 @@
         xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd"
 >
-    <entity name="Jgrc\Shop\Domain\Cart\Cart" table="carts">
+    <entity name="Jgrc\Shop\Domain\Filter\Filter" table="filters">
         <id name="id" type="uuid_type" column="id" length="36" />
-        <field name="state" type="cart_state_type" column="state" nullable="false" />
+        <field name="name" type="name_type" column="name" nullable="false"/>
         <field name="createdAt" type="datetime_immutable" column="created_at" nullable="false" />
-        <many-to-one field="user" target-entity="Jgrc\Shop\Domain\User\User">
-            <join-column name="user_id" referenced-column-name="id" nullable="false" />
+        <many-to-one field="filterGroup" target-entity="Jgrc\Shop\Domain\Filter\FilterGroup" inversed-by="filters">
+            <join-column name="filter_group_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
-        <one-to-many field="lines" target-entity="Jgrc\Shop\Domain\Cart\CartLine" mapped-by="cart">
-            <cascade>
-                <cascade-persist/>
-            </cascade>
-        </one-to-many>
     </entity>
 </doctrine-mapping>

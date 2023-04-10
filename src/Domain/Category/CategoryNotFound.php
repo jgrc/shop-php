@@ -11,6 +11,6 @@ class CategoryNotFound extends NotFound
 {
     public static function fromId(Uuid $id): self
     {
-        return new self(sprintf('Category "%s" not found.', $id->value()));
+        return new self(sprintf('Category "%s" not found.', $id));
     }
 }

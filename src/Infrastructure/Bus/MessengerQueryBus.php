@@ -20,9 +20,9 @@ class MessengerQueryBus implements QueryBus
 
     public function query(Query $query): object
     {
-        /** @var HandledStamp $handledStamp */
+        /** @var HandledStamp */
         $handledStamp = $this->bus->dispatch($query)->last(HandledStamp::class);
-        /** @var object $result */
+        /** @var object */
         $result = $handledStamp->getResult();
         return $result;
     }

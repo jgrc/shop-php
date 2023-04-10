@@ -26,6 +26,11 @@ doctrine:
                 type: xml
                 dir: '%kernel.project_dir%/src/Infrastructure/Symfony/config/orm/Product'
                 prefix: 'Jgrc\Shop\Domain\Product'
+            Jgrc\Shop\Domain\Filter:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Infrastructure/Symfony/config/orm/Filter'
+                prefix: 'Jgrc\Shop\Domain\Filter'
             Jgrc\Shop\Domain\User:
                 is_bundle: false
                 type: xml

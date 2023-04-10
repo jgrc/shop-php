@@ -16,7 +16,7 @@ class Cart
     private Uuid $id;
     private User $user;
     private CartState $state;
-    /** @var Collection<int, CartLine> $lines */
+    /** @var Collection<int, CartLine> */
     private Collection $lines;
     private DateTimeImmutable $createdAt;
 

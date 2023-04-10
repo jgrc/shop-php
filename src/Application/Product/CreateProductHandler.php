@@ -11,22 +11,17 @@ use Jgrc\Shop\Domain\Common\Vo\Image;
 use Jgrc\Shop\Domain\Common\Vo\Name;
 use Jgrc\Shop\Domain\Common\Vo\Price;
 use Jgrc\Shop\Domain\Common\Vo\Uuid;
+use Jgrc\Shop\Domain\Product\Product;
 use Jgrc\Shop\Domain\Product\ProductAlreadyExists;
 use Jgrc\Shop\Domain\Product\ProductRepository;
-use Jgrc\Shop\Domain\Product\Service\ProductFactory;
 
 class CreateProductHandler
 {
-    private ProductFactory $productFactory;
     private CategoryRepository $categoryRepository;
     private ProductRepository $productRepository;
 
-    public function __construct(
-        ProductFactory $productFactory,
-        CategoryRepository $categoryRepository,
-        ProductRepository $productRepository
-    ) {
-        $this->productFactory = $productFactory;
+    public function __construct(CategoryRepository $categoryRepository, ProductRepository $productRepository)
+    {
         $this->categoryRepository = $categoryRepository;
         $this->productRepository = $productRepository;
     }
@@ -42,7 +37,7 @@ class CreateProductHandler
         $this->guardIdDoesNotExists($id);
 
         $category = $this->loadCategory($categoryId);
-        $product = $this->productFactory->__invoke($id, $name, $price, $image, $category, $command->createdAt());
+        $product = new Product($id, $name, $price, $image, $category, $command->createdAt());
         $this->productRepository->save($product);
     }
 

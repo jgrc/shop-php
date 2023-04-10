@@ -22,7 +22,7 @@ class DbalProductProjector implements ProductProjector
 
     public function create(Uuid $id, DateTimeImmutable $when): ProductProjection
     {
-        /** @var string[] $product */
+        /** @var string[] */
         $product = $this
             ->connection
             ->createQueryBuilder()

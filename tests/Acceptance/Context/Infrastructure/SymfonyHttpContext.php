@@ -41,7 +41,7 @@ final class SymfonyHttpContext implements Context
     {
         Assertion::notNull($this->response, 'No response');
         $expected = $content->getRaw();
-        /** @var string $response */
+        /** @var string */
         $response = $this->response->getContent();
         JsonAssertion::eq($expected, $response);
     }

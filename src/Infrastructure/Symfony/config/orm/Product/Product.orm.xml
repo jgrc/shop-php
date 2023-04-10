@@ -18,5 +18,18 @@
         <many-to-one field="category" target-entity="Jgrc\Shop\Domain\Category\Category">
             <join-column name="category_id" referenced-column-name="id" nullable="false" />
         </many-to-one>
+        <many-to-many field="filters" target-entity="Jgrc\Shop\Domain\Filter\Filter">
+            <join-table name="products_filters">
+                <join-columns>
+                    <join-column name="product_id" referenced-column-name="id" />
+                </join-columns>
+                <inverse-join-columns>
+                    <join-column name="filter_id" referenced-column-name="id" />
+                </inverse-join-columns>
+            </join-table>
+            <cascade>
+                <cascade-persist/>
+            </cascade>
+        </many-to-many>
     </entity>
 </doctrine-mapping>

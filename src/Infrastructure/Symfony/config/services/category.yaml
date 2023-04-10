@@ -6,15 +6,10 @@ services:
     arguments:
       - '@doctrine.orm.entity_manager'
 
-  # DOMAIN SERVICES
-  category.factory:
-    class: Jgrc\Shop\Domain\Category\Service\CategoryFactory
-
   # COMMAND HANDLERS
   create.category.handler:
     class: Jgrc\Shop\Application\Category\CreateCategoryHandler
     arguments:
-      - '@category.factory'
       - '@category.repository'
     tags:
       - { name: messenger.message_handler, bus: messenger.command.bus }

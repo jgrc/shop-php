@@ -4,12 +4,16 @@ declare(strict_types=1);
 
 namespace Jgrc\Shop\Domain\Product;
 
+use Assert\Assertion;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Jgrc\Shop\Domain\Category\Category;
 use Jgrc\Shop\Domain\Common\Vo\Image;
 use Jgrc\Shop\Domain\Common\Vo\Name;
 use Jgrc\Shop\Domain\Common\Vo\Price;
 use Jgrc\Shop\Domain\Common\Vo\Uuid;
+use Jgrc\Shop\Domain\Filter\Filter;
 
 class Product
 {
@@ -20,6 +24,8 @@ class Product
     private Category $category;
     private bool $enabled;
     private DateTimeImmutable $createdAt;
+    /** @var Collection<int, Filter>  */
+    private Collection $filters;
 
     public function __construct(
         Uuid $id,
@@ -36,6 +42,7 @@ class Product
         $this->category = $category;
         $this->createdAt = $createdAt;
         $this->enabled = true;
+        $this->filters = new ArrayCollection();
     }
 
     public function id(): Uuid
@@ -71,5 +78,13 @@ class Product
     public function createdAt(): DateTimeImmutable
     {
         return $this->createdAt;
+    }
+
+    public function addFilter(Filter $filter): void
+    {
+        if ($this->filters->contains($filter)) {
+            return;
+        }
+        $this->filters->add($filter);
     }
 }

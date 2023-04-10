@@ -4,20 +4,18 @@ declare(strict_types=1);
 
 namespace Jgrc\Shop\Application\Category;
 
+use Jgrc\Shop\Domain\Category\Category;
 use Jgrc\Shop\Domain\Category\CategoryAlreadyExists;
 use Jgrc\Shop\Domain\Category\CategoryRepository;
-use Jgrc\Shop\Domain\Category\Service\CategoryFactory;
 use Jgrc\Shop\Domain\Common\Vo\Name;
 use Jgrc\Shop\Domain\Common\Vo\Uuid;
 
 class CreateCategoryHandler
 {
-    private CategoryFactory $categoryFactory;
     private CategoryRepository $categoryRepository;
 
-    public function __construct(CategoryFactory $categoryFactory, CategoryRepository $categoryRepository)
+    public function __construct(CategoryRepository $categoryRepository)
     {
-        $this->categoryFactory = $categoryFactory;
         $this->categoryRepository = $categoryRepository;
     }
 
@@ -28,7 +26,7 @@ class CreateCategoryHandler
 
         $this->guardIdDoesNotExists($id);
 
-        $category = $this->categoryFactory->__invoke($id, $name, $command->createdAt());
+        $category = new Category($id, $name, $command->createdAt());
         $this->categoryRepository->save($category);
     }
 
