@@ -50,3 +50,11 @@ services:
       - '@command.bus'
       - '@product.repository'
     public: true
+
+  Jgrc\Shop\Acceptance\Context\Domain\FilterContext:
+    class: Jgrc\Shop\Acceptance\Context\Domain\FilterContext
+    arguments:
+      - '@command.bus'
+      - '@filter-group.repository'
+      - '@filter.repository'
+    public: true

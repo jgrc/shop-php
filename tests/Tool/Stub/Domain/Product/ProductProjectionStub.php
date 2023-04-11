@@ -28,29 +28,29 @@ class ProductProjectionStub
     {
         $this->id = StringStub::uuid();
         $this->name = StringStub::word();
-        $this->price = IntStub::positive();
+        $this->price = IntStub::positive(100000);
         $this->indexedAt = DateTimeImmutableStub::random();
     }
 
-    public function withId(string $id): ProductProjectionStub
+    public function withId(string $id): self
     {
         $this->id = $id;
         return $this;
     }
 
-    public function withName(string $name): ProductProjectionStub
+    public function withName(string $name): self
     {
         $this->name = $name;
         return $this;
     }
 
-    public function withPrice(int $price): ProductProjectionStub
+    public function withPrice(int $price): self
     {
         $this->price = $price;
         return $this;
     }
 
-    public function withIndexedAt(DateTimeImmutable $indexedAt): ProductProjectionStub
+    public function withIndexedAt(DateTimeImmutable $indexedAt): self
     {
         $this->indexedAt = $indexedAt;
         return $this;

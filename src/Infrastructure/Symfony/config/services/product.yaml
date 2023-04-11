@@ -33,6 +33,14 @@ services:
     tags:
       - { name: messenger.message_handler, bus: messenger.command.bus }
 
+  add.product-filters.handler:
+    class: Jgrc\Shop\Application\Product\AddProductFiltersHandler
+    arguments:
+      - '@product.repository'
+      - '@filter.repository'
+    tags:
+      - { name: messenger.message_handler, bus: messenger.command.bus }
+
   project.product.handler:
     class: Jgrc\Shop\Application\Product\ProjectProductHandler
     arguments:
@@ -56,6 +64,13 @@ services:
     arguments:
       - '@command.bus'
       - '@clock'
+    tags:
+      - console.command
+
+  cli.product.add-filters:
+    class: Jgrc\Shop\Infrastructure\Ui\Cli\Product\AddProductFiltersCli
+    arguments:
+      - '@command.bus'
     tags:
       - console.command
 

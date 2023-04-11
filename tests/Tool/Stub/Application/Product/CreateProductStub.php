@@ -30,49 +30,49 @@ class CreateProductStub
     {
         $this->id = StringStub::uuid();
         $this->name = StringStub::word();
-        $this->price = IntStub::positive();
+        $this->price = IntStub::positive(100000);
         $this->image = StringStub::url();
         $this->categoryId = StringStub::uuid();
         $this->createdAt = DateTimeImmutableStub::random();
     }
 
-    public function withId(string $id): CreateProductStub
+    public function withId(string $id): self
     {
         $this->id = $id;
         return $this;
     }
 
-    public function withName(string $name): CreateProductStub
+    public function withName(string $name): self
     {
         $this->name = $name;
         return $this;
     }
 
-    public function withPrice(int $price): CreateProductStub
+    public function withPrice(int $price): self
     {
         $this->price = $price;
         return $this;
     }
 
-    public function withImage(string $image): CreateProductStub
+    public function withImage(string $image): self
     {
         $this->image = $image;
         return $this;
     }
 
-    public function withCategoryId(string $categoryId): CreateProductStub
+    public function withCategoryId(string $categoryId): self
     {
         $this->categoryId = $categoryId;
         return $this;
     }
 
-    public function withCreatedAt(DateTimeImmutable $createdAt): CreateProductStub
+    public function withCreatedAt(DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
         return $this;
     }
 
-    protected function instance(): CreateProduct
+    protected function instance(): object
     {
         return new CreateProduct(
             $this->id,

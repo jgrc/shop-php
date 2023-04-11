@@ -37,7 +37,7 @@ class CreateCategoryHandlerTest extends TestCase
             ->with($id)
             ->willReturn(null);
         $this->categoryRepository
-            ->expects($this->exactly(1))
+            ->expects($this->once())
             ->method('save')
             ->with($category);
 

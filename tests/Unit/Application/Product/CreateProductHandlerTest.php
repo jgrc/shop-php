@@ -52,7 +52,7 @@ class CreateProductHandlerTest extends TestCase
             ->with($categoryId)
             ->willReturn($category);
         $this->productRepository
-            ->expects($this->exactly(1))
+            ->expects($this->once())
             ->method('save')
             ->with($product);
 

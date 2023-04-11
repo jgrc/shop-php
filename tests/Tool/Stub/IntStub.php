@@ -11,14 +11,14 @@ class IntStub
         return RandomGenerator::instance()->faker()->numberBetween($min, $max);
     }
 
-    public static function positive(): int
+    public static function positive(int $max = PHP_INT_MAX): int
     {
-        return IntStub::between(1, PHP_INT_MAX);
+        return IntStub::between(1, $max);
     }
 
-    public static function negative(): int
+    public static function negative(int $min = PHP_INT_MIN): int
     {
-        return IntStub::between(PHP_INT_MIN, -1);
+        return IntStub::between($min, -1);
     }
 
     public static function random(): int

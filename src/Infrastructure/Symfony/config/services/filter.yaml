@@ -1,0 +1,45 @@
+services:
+
+  # DOCTRINE
+  filter-group.repository:
+    class: Jgrc\Shop\Infrastructure\Persistence\Orm\Repository\DoctrineFilterGroupRepository
+    arguments:
+      - '@doctrine.orm.entity_manager'
+
+  filter.repository:
+    class: Jgrc\Shop\Infrastructure\Persistence\Orm\Repository\DoctrineFilterRepository
+    arguments:
+      - '@doctrine.orm.entity_manager'
+
+  # COMMAND HANDLERS
+  create.filter-group.handler:
+    class: Jgrc\Shop\Application\Filter\CreateFilterGroupHandler
+    arguments:
+      - '@filter-group.repository'
+    tags:
+      - { name: messenger.message_handler, bus: messenger.command.bus }
+
+  create.filter.handler:
+    class: Jgrc\Shop\Application\Filter\CreateFilterHandler
+    arguments:
+      - '@filter-group.repository'
+      - '@filter.repository'
+    tags:
+      - { name: messenger.message_handler, bus: messenger.command.bus }
+
+  # CLI COMMANDS
+  cli.filter-group.create:
+    class: Jgrc\Shop\Infrastructure\Ui\Cli\Filter\CreateFilterGroupCli
+    arguments:
+      - '@command.bus'
+      - '@clock'
+    tags:
+      - console.command
+
+  cli.filter.create:
+    class: Jgrc\Shop\Infrastructure\Ui\Cli\Filter\CreateFilterCli
+    arguments:
+      - '@command.bus'
+      - '@clock'
+    tags:
+      - console.command

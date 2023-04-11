@@ -11,6 +11,6 @@ class PriceStub
 {
     public static function random(): Price
     {
-        return new Price(IntStub::positive());
+        return new Price(IntStub::positive(100000));
     }
 }

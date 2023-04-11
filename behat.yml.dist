@@ -12,6 +12,7 @@ default:
         - Jgrc\Shop\Acceptance\Context\Infrastructure\RandomContext
         - Jgrc\Shop\Acceptance\Context\Domain\CategoryContext
         - Jgrc\Shop\Acceptance\Context\Domain\ProductContext
+        - Jgrc\Shop\Acceptance\Context\Domain\FilterContext
   extensions:
     FriendsOfBehat\SymfonyExtension:
       bootstrap: tests/bootstrap.php

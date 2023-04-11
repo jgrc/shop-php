@@ -80,6 +80,12 @@ class Product
         return $this->createdAt;
     }
 
+    /** @return Collection<int, Filter> */
+    public function filters(): Collection
+    {
+        return $this->filters;
+    }
+
     public function addFilter(Filter $filter): void
     {
         if ($this->filters->contains($filter)) {

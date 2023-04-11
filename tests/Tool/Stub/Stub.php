@@ -25,6 +25,11 @@ trait Stub
         return $stub;
     }
 
+    final public static function builder(): static
+    {
+        return new static();
+    }
+
     final public static function random(): object
     {
         return (new static())->build();

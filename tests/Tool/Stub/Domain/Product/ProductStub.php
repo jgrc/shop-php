@@ -44,37 +44,37 @@ class ProductStub
         $this->createdAt = DateTimeImmutableStub::random();
     }
 
-    public function withId(Uuid $id): ProductStub
+    public function withId(Uuid $id): self
     {
         $this->id = $id;
         return $this;
     }
 
-    public function withName(Name $name): ProductStub
+    public function withName(Name $name): self
     {
         $this->name = $name;
         return $this;
     }
 
-    public function withPrice(Price $price): ProductStub
+    public function withPrice(Price $price): self
     {
         $this->price = $price;
         return $this;
     }
 
-    public function withImage(Image $image): ProductStub
+    public function withImage(Image $image): self
     {
         $this->image = $image;
         return $this;
     }
 
-    public function withCategory(Category $category): ProductStub
+    public function withCategory(Category $category): self
     {
         $this->category = $category;
         return $this;
     }
 
-    public function withCreatedAt(DateTimeImmutable $createdAt): ProductStub
+    public function withCreatedAt(DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
         return $this;

@@ -2,19 +2,19 @@
 
 declare(strict_types=1);
 
-namespace Jgrc\Shop\Tool\Stub\Application\Category;
+namespace Jgrc\Shop\Tool\Stub\Application\Filter;
 
 use DateTimeImmutable;
-use Jgrc\Shop\Application\Category\CreateCategory;
+use Jgrc\Shop\Application\Filter\CreateFilterGroup;
 use Jgrc\Shop\Tool\Stub\DateTimeImmutableStub;
 use Jgrc\Shop\Tool\Stub\StringStub;
 use Jgrc\Shop\Tool\Stub\Stub;
 
 /**
- * @method CreateCategory build()
- * @method static CreateCategory random()
+ * @method CreateFilterGroup build()
+ * @method static CreateFilterGroup random()
  */
-class CreateCategoryStub
+class CreateFilterGroupStub
 {
     use Stub;
 
@@ -49,6 +49,6 @@ class CreateCategoryStub
 
     protected function instance(): object
     {
-        return new CreateCategory($this->id, $this->name, $this->createdAt);
+        return new CreateFilterGroup($this->id, $this->name, $this->createdAt);
     }
 }

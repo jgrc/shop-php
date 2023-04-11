@@ -12,6 +12,7 @@ use DateTimeImmutable;
 use Jgrc\Shop\Application\Product\CreateProduct;
 use Jgrc\Shop\Domain\Common\Bus\CommandBus;
 use Jgrc\Shop\Domain\Common\Vo\Uuid;
+use Jgrc\Shop\Domain\Filter\Filter;
 use Jgrc\Shop\Domain\Product\Product;
 use Jgrc\Shop\Domain\Product\ProductNotFound;
 use Jgrc\Shop\Domain\Product\ProductRepository;
@@ -96,6 +97,21 @@ class ProductContext implements Context
                         ->eq(
                             $product->createdAt()->format(DATE_ATOM),
                             'Unexpected created_at. Expected: "%s", current: "%s"'
+                        );
+                }
+                if (array_key_exists('filter_ids', $row)) {
+                    $lazy = $lazy
+                        ->that(
+                            array_map(
+                                fn(string $id): string => trim($id),
+                                explode(",", $row['filter_ids'])
+                            )
+                        )
+                        ->eq(
+                            array_map(
+                                fn(Filter $filter): string => $filter->id()->value(),
+                                $product->filters()->toArray()
+                            )
                         );
                 }
                 $lazy->verifyNow();
