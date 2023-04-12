@@ -9,6 +9,7 @@ use Assert\Assertion;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
 use DateTimeImmutable;
+use Jgrc\Shop\Application\Product\AddProductFilters;
 use Jgrc\Shop\Application\Product\CreateProduct;
 use Jgrc\Shop\Domain\Common\Bus\CommandBus;
 use Jgrc\Shop\Domain\Common\Vo\Uuid;
@@ -16,6 +17,7 @@ use Jgrc\Shop\Domain\Filter\Filter;
 use Jgrc\Shop\Domain\Product\Product;
 use Jgrc\Shop\Domain\Product\ProductNotFound;
 use Jgrc\Shop\Domain\Product\ProductRepository;
+use Jgrc\Shop\Tool\Stub\Application\Product\AddProductFiltersStub;
 use Jgrc\Shop\Tool\Stub\Application\Product\CreateProductStub;
 
 class ProductContext implements Context
@@ -58,6 +60,30 @@ class ProductContext implements Context
             $tableNode->getHash()
         );
         array_walk($createProducts, fn(CreateProduct $command) => $this->commandBus->dispatch($command));
+    }
+
+    /** @Given there are products with the following filters: */
+    public function thereAreProductsFollowingFilters(TableNode $tableNode): void
+    {
+        $addProductFilters = array_map(
+            function (array $row) {
+                $builder = new AddProductFiltersStub();
+                if (array_key_exists('product_id', $row)) {
+                    $builder->withProductId($row['product_id']);
+                }
+                if (array_key_exists('filter_ids', $row)) {
+                    $builder->withFilterIds(
+                        ...array_map(
+                            fn(string $filterId): string => trim($filterId),
+                            explode(',', $row['filter_ids'])
+                        )
+                    );
+                }
+                return $builder->build();
+            },
+            $tableNode->getHash()
+        );
+        array_walk($addProductFilters, fn(AddProductFilters $command) => $this->commandBus->dispatch($command));
     }
 
     /** @Then the following products should exist: */

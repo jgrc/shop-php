@@ -5,10 +5,13 @@ parameters:
 		- tests
 	ignoreErrors:
 	    -
-	        message: '#Cannot cast mixed to (string|int).#'
+	        message: '#Cannot cast mixed to (string|int)\.#'
 	        path: src/Infrastructure/Ui/Cli
 	    -
 	        message: '#should return string but returns array\|string#'
+	        path: tests/Tool/Stub
+	    -
+	        message: '#Unsafe usage of new static\(\)\.#'
 	        path: tests/Tool/Stub
 	    -
 	        message: '#Call to an undefined method [a-zA-Z0-9\\_]+::method\(\)#'

@@ -8,7 +8,10 @@ use DateTimeImmutable;
 use Elastic\Elasticsearch\Client;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use Elastic\Elasticsearch\Response\Elasticsearch;
+use Jgrc\Shop\Domain\Category\View\CategoryProjection;
 use Jgrc\Shop\Domain\Common\Vo\Uuid;
+use Jgrc\Shop\Domain\Filter\View\FilterGroupProjection;
+use Jgrc\Shop\Domain\Filter\View\FilterProjection;
 use Jgrc\Shop\Domain\Product\ProductNotFound;
 use Jgrc\Shop\Domain\Product\View\ProductProjection;
 use Jgrc\Shop\Domain\Product\View\ProductView;
@@ -29,13 +32,33 @@ class ElasticProductView implements ProductView
         try {
             /** @var Elasticsearch */
             $response = $this->client->get(['index' => $this->index, 'id' => $id]);
-            $document = $response->asArray();
+            $product = $response->asArray()['_source'];
 
             return new ProductProjection(
                 $id->value(),
-                $document['_source']['name'],
-                $document['_source']['price'],
-                new DateTimeImmutable($document['_source']['indexed_at'])
+                $product['name'],
+                $product['price'],
+                $product['image'],
+                new CategoryProjection(
+                    $product['category']['id'],
+                    $product['category']['name']
+                ),
+                $product['enabled'],
+                new DateTimeImmutable($product['created_at']),
+                ...array_map(
+                    fn(array $filterGroup): FilterGroupProjection => new FilterGroupProjection(
+                        $filterGroup['id'],
+                        $filterGroup['name'],
+                        ...array_map(
+                            fn(array $filter): FilterProjection => new FilterProjection(
+                                $filter['id'],
+                                $filter['name']
+                            ),
+                            $filterGroup['filters']
+                        )
+                    ),
+                    $product['filter_groups']
+                )
             );
         } catch (ClientResponseException $exception) {
             if ($exception->getCode() === 404) {

@@ -5,8 +5,13 @@ declare(strict_types=1);
 namespace Jgrc\Shop\Tool\Stub\Domain\Product;
 
 use DateTimeImmutable;
+use Jgrc\Shop\Domain\Category\View\CategoryProjection;
+use Jgrc\Shop\Domain\Filter\View\FilterGroupProjection;
 use Jgrc\Shop\Domain\Product\View\ProductProjection;
+use Jgrc\Shop\Tool\Stub\BoolStub;
 use Jgrc\Shop\Tool\Stub\DateTimeImmutableStub;
+use Jgrc\Shop\Tool\Stub\Domain\Category\CategoryProjectionStub;
+use Jgrc\Shop\Tool\Stub\Domain\Filter\FilterGroupProjectionStub;
 use Jgrc\Shop\Tool\Stub\IntStub;
 use Jgrc\Shop\Tool\Stub\StringStub;
 use Jgrc\Shop\Tool\Stub\Stub;
@@ -22,14 +27,23 @@ class ProductProjectionStub
     private string $id;
     private string $name;
     private int $price;
-    private DateTimeImmutable $indexedAt;
+    private string $image;
+    private CategoryProjection $category;
+    private bool $enabled;
+    private DateTimeImmutable $createdAt;
+    /** @var FilterGroupProjection[] */
+    private array $filterGroups;
 
-    final public function __construct()
+    public function __construct()
     {
         $this->id = StringStub::uuid();
-        $this->name = StringStub::word();
+        $this->name = StringStub::word(3);
         $this->price = IntStub::positive(100000);
-        $this->indexedAt = DateTimeImmutableStub::random();
+        $this->image = StringStub::url();
+        $this->category = CategoryProjectionStub::random();
+        $this->enabled = BoolStub::random();
+        $this->createdAt = DateTimeImmutableStub::random();
+        $this->filterGroups = [FilterGroupProjectionStub::random()];
     }
 
     public function withId(string $id): self
@@ -50,9 +64,33 @@ class ProductProjectionStub
         return $this;
     }
 
-    public function withIndexedAt(DateTimeImmutable $indexedAt): self
+    public function withImage(string $image): self
     {
-        $this->indexedAt = $indexedAt;
+        $this->image = $image;
+        return $this;
+    }
+
+    public function withCategory(CategoryProjection $category): self
+    {
+        $this->category = $category;
+        return $this;
+    }
+
+    public function withEnabled(bool $enabled): self
+    {
+        $this->enabled = $enabled;
+        return $this;
+    }
+
+    public function withCreatedAt(DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+        return $this;
+    }
+
+    public function withFilterGroups(FilterGroupProjection ...$filterGroups): self
+    {
+        $this->filterGroups = $filterGroups;
         return $this;
     }
 
@@ -62,7 +100,11 @@ class ProductProjectionStub
             $this->id,
             $this->name,
             $this->price,
-            $this->indexedAt
+            $this->image,
+            $this->category,
+            $this->enabled,
+            $this->createdAt,
+            ...$this->filterGroups
         );
     }
 }

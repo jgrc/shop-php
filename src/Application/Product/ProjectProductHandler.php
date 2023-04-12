@@ -25,7 +25,7 @@ class ProjectProductHandler
     public function __invoke(ProjectProduct $command): void
     {
         $id = new Uuid($command->id());
-        $productProjection = $this->productProjector->create($id, $this->clock->now());
-        $this->productStore->save($productProjection);
+        $productProjection = $this->productProjector->create($id);
+        $this->productStore->save($productProjection, $this->clock->now());
     }
 }

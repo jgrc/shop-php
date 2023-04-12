@@ -44,12 +44,12 @@ class ProjectProductHandlerTest extends TestCase
             ->willReturn($now);
         $this->productProjector
             ->method('create')
-            ->with(new Uuid($command->id()), $now)
+            ->with(new Uuid($command->id()))
             ->willReturn($productProjection);
         $this->productStore
             ->expects($this->once())
             ->method('save')
-            ->with($productProjection);
+            ->with($productProjection, $now);
 
         $this->sut->__invoke($command);
     }
