@@ -62,15 +62,26 @@ services:
     networks:
       - app
 
-  kibana:
-    image: docker.elastic.co/kibana/kibana:8.7.0
-    environment:
-      ELASTICSEARCH_URL: http://elasticsearch:9200
-      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+  rabbitmq:
+    image: rabbitmq:3.10.20-management-alpine
     ports:
-      - 5601:5601
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      RABBITMQ_DEFAULT_USER: ${AMQP_USER}
+      RABBITMQ_DEFAULT_PASS: ${AMQP_PASSWORD}
     networks:
       - app
+
+#  kibana:
+#    image: docker.elastic.co/kibana/kibana:8.7.0
+#    environment:
+#      ELASTICSEARCH_URL: http://elasticsearch:9200
+#      ELASTICSEARCH_HOSTS: http://elasticsearch:9200
+#    ports:
+#      - 5601:5601
+#    networks:
+#      - app
 
 networks:
   app:
